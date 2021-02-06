@@ -5,7 +5,10 @@
   "scripts": {
     "dev": "next dev",
     "build": "next build",
-    "start": "next start"
+    "start": "next start",
+    "lint": "eslint 'src/**/*.{ts,tsx}' && prettier --check --ignore-path .gitignore '**/*.{js,ts,tsx,json}'",
+    "lintfix": "eslint --fix 'src/**/*.{ts,tsx}' && prettier --write --ignore-path .gitignore '**/*.{js,ts,tsx,json,md}'",
+    "typecheck": "tsc --noEmit"
   },
   "dependencies": {
     "next": "10.0.6",
@@ -15,6 +18,14 @@
   "devDependencies": {
     "@types/node": "^14.14.25",
     "@types/react": "^17.0.1",
+    "@typescript-eslint/eslint-plugin": "4.14.2",
+    "@typescript-eslint/parser": "4.14.2",
+    "eslint": "7.19.0",
+    "eslint-config-prettier": "7.2.0",
+    "eslint-plugin-import": "2.22.1",
+    "eslint-plugin-react": "7.22.0",
+    "eslint-plugin-react-hooks": "4.2.0",
+    "prettier": "2.2.1",
     "typescript": "^4.1.3"
   }
 }
