@@ -4,10 +4,10 @@ import fetch from "node-fetch";
 import api from "../api/$api";
 
 const fetchConfig: Parameters<typeof aspida>[1] = {
-  baseURL: "https://hbsnow.microcms.io/api",
+  baseURL: process.env.MICRO_CMS_HOST,
   throwHttpErrors: true,
   headers: {
-    "X-API-KEY": "",
+    "X-API-KEY": process.env.MICRO_CMS_API_KEY,
   },
 };
 
