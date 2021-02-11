@@ -6,9 +6,11 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "eslint 'src/**/*.{ts,tsx}' && prettier --check --ignore-path .gitignore '**/*.{js,ts,tsx,json}'",
+    "lint": "eslint 'src/**/*.{ts,tsx}' && prettier --check '**/*.{js,ts,tsx,json}'",
     "lintfix": "eslint --fix 'src/**/*.{ts,tsx}' && prettier --write --ignore-path .gitignore '**/*.{js,ts,tsx,json,md}'",
-    "typecheck": "tsc --noEmit",
+    "typecheck": "tsc --pretty --noEmit",
+    "test": "jest --watch",
+    "test:ci": "jest --ci",
     "api:build": "aspida"
   },
   "dependencies": {
@@ -19,17 +21,24 @@
     "react-dom": "17.0.1"
   },
   "devDependencies": {
+    "@types/jest": "26.0.20",
     "@types/node": "14.14.25",
     "@types/node-fetch": "2.5.8",
     "@types/react": "17.0.1",
     "@typescript-eslint/eslint-plugin": "4.14.2",
     "@typescript-eslint/parser": "4.14.2",
+    "babel-jest": "26.6.3",
     "eslint": "7.19.0",
     "eslint-config-prettier": "7.2.0",
     "eslint-plugin-import": "2.22.1",
     "eslint-plugin-react": "7.22.0",
     "eslint-plugin-react-hooks": "4.2.0",
+    "jest": "26.6.3",
     "prettier": "2.2.1",
     "typescript": "4.1.3"
+  },
+  "engines": {
+    "node": "^12",
+    "npm": "please-use-yarn"
   }
 }

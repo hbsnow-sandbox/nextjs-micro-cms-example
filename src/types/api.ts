@@ -15,7 +15,7 @@ export type CommonContent = {
 
 // https://document.microcms.io/content-api/get-list-contents
 export type GetListContentsQuery = {
-  draftKey?: boolean;
+  draftKey?: string;
   limit?: number;
   orders?: string;
   q?: string;
@@ -27,7 +27,7 @@ export type GetListContentsQuery = {
 
 // https://document.microcms.io/content-api/get-content
 export type GetContentQuery = {
-  draftKey?: boolean;
+  draftKey?: string;
   fields?: string;
   depth?: number;
 };
