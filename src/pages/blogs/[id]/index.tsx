@@ -1,6 +1,7 @@
 import React from "react";
 
-import { NextPage, GetStaticProps } from "next";
+import { NextPage, GetStaticProps, GetStaticPaths } from "next";
+import { useRouter } from "next/dist/client/router";
 import Link from "next/link";
 
 import { Blog } from "../../../types/blog";
@@ -10,13 +11,20 @@ import { toStringId } from "../../../utils/toStringId";
 type Props = {
   blog: Blog;
   draftKey?: string;
+  date: string;
 };
 
 const Page: NextPage<Props> = (props) => {
   const { blog, draftKey } = props;
+  const router = useRouter();
+
+  if (router.isFallback) {
+    return <div>Loading...</div>;
+  }
 
   return (
     <>
+      <p>このページは{new Date().toString()}に生成されました</p>
       {draftKey && (
         <div>
           現在プレビューモードで閲覧中です。
@@ -55,16 +63,13 @@ const Page: NextPage<Props> = (props) => {
   );
 };
 
-export const getStaticPaths = async (): Promise<{
-  fallback: boolean;
-  paths: string[];
-}> => {
+export const getStaticPaths: GetStaticPaths = async () => {
   const blogList = await client.v1.blogs.$get({
-    query: { fields: "id" },
+    query: { fields: "id", limit: 3 },
   });
 
   return {
-    fallback: false,
+    fallback: true,
     paths: blogList.contents.map((blog) => `/blogs/${blog.id}/`),
   };
 };
@@ -74,7 +79,7 @@ export const getStaticProps: GetStaticProps = async ({
   previewData,
 }) => {
   if (!params?.id) {
-    throw new Error("Error! ID not found");
+    throw new Error("Error: ID not found");
   }
 
   const id = toStringId(params.id);
@@ -90,6 +95,7 @@ export const getStaticProps: GetStaticProps = async ({
 
   return {
     props: { blog, ...draftKey },
+    revalidate: 60,
   };
 };
 

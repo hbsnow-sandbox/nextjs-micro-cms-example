@@ -1,6 +1,7 @@
 import React from "react";
 
-import { GetStaticProps, NextPage } from "next";
+import { GetStaticPaths, GetStaticProps, NextPage } from "next";
+import { useRouter } from "next/dist/client/router";
 import Link from "next/link";
 
 import { CommonListContents } from "../../../types/api";
@@ -14,6 +15,11 @@ type Props = {
 
 const Page: NextPage<Props> = (props) => {
   const { blogList } = props;
+  const router = useRouter();
+
+  if (router.isFallback) {
+    return <div>Loading...</div>;
+  }
 
   return (
     <main>
@@ -31,23 +37,16 @@ const Page: NextPage<Props> = (props) => {
   );
 };
 
-export const getStaticPaths = async (): Promise<{
-  fallback: boolean;
-  paths: string[];
-}> => {
-  const tagList = await client.v1.tags.$get({
-    query: { fields: "id" },
-  });
-
+export const getStaticPaths: GetStaticPaths = async () => {
   return {
-    fallback: false,
-    paths: tagList.contents.map((blog) => `/tags/${blog.id}/`),
+    fallback: true,
+    paths: [],
   };
 };
 
 export const getStaticProps: GetStaticProps = async ({ params }) => {
   if (!params?.id) {
-    throw new Error("Error! ID not found");
+    throw new Error("Error: ID not found");
   }
 
   const id = toStringId(params.id);
@@ -60,6 +59,7 @@ export const getStaticProps: GetStaticProps = async ({ params }) => {
 
   return {
     props: { blogList },
+    revalidate: 600,
   };
 };
 
