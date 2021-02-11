@@ -60,6 +60,7 @@ export const getStaticProps: GetStaticProps = async ({ params }) => {
   return {
     props: { blogList },
     revalidate: 600,
+    notFound: true,
   };
 };
 

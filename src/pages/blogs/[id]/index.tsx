@@ -96,6 +96,7 @@ export const getStaticProps: GetStaticProps = async ({
   return {
     props: { blog, ...draftKey },
     revalidate: 60,
+    notFound: true,
   };
 };
 
