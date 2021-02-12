@@ -11,6 +11,7 @@ import { toStringId } from "../../../utils/toStringId";
 type Props = {
   blog: Blog;
   draftKey?: string;
+  date: string;
 };
 
 const Page: NextPage<Props> = (props) => {
@@ -23,7 +24,7 @@ const Page: NextPage<Props> = (props) => {
 
   return (
     <>
-      <p>このページは{new Date().toString()}に生成されました</p>
+      <p>このページは{props.date}に生成されました</p>
       {draftKey && (
         <div>
           現在プレビューモードで閲覧中です。
@@ -64,7 +65,7 @@ const Page: NextPage<Props> = (props) => {
 
 export const getStaticPaths: GetStaticPaths = async () => {
   return {
-    fallback: true,
+    fallback: "blocking",
     paths: ["/blogs/test-ssg/"],
   };
 };
@@ -90,7 +91,7 @@ export const getStaticProps: GetStaticProps = async ({
       },
     });
     return {
-      props: { blog, ...draftKey },
+      props: { blog, ...draftKey, date: new Date().toString() },
       revalidate: 60,
     };
   } catch (e) {
