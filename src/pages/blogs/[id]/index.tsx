@@ -85,21 +85,21 @@ export const getStaticProps: GetStaticProps = async ({
   const draftKey = previewData?.draftKey
     ? { draftKey: previewData.draftKey }
     : {};
-  const blog = await client.v1.blogs._id(id).$get({
-    query: {
-      fields: "id,title,body,publishedAt,tags",
-      ...draftKey,
-    },
-  });
 
-  if (!blog) {
+  try {
+    const blog = await client.v1.blogs._id(id).$get({
+      query: {
+        fields: "id,title,body,publishedAt,tags",
+        ...draftKey,
+      },
+    });
+    return {
+      props: { blog, ...draftKey },
+      revalidate: 60,
+    };
+  } catch (e) {
     return { notFound: true };
   }
-
-  return {
-    props: { blog, ...draftKey },
-    revalidate: 60,
-  };
 };
 
 export default Page;

@@ -50,21 +50,21 @@ export const getStaticProps: GetStaticProps = async ({ params }) => {
   }
 
   const id = toStringId(params.id);
-  const blogList = await client.v1.blogs.$get({
-    query: {
-      fields: "id,title",
-      filters: `tags[contains]${id}`,
-    },
-  });
 
-  if (!blogList) {
+  try {
+    const blogList = await client.v1.blogs.$get({
+      query: {
+        fields: "id,title",
+        filters: `tags[contains]${id}`,
+      },
+    });
+    return {
+      props: { blogList },
+      revalidate: 600,
+    };
+  } catch (e) {
     return { notFound: true };
   }
-
-  return {
-    props: { blogList },
-    revalidate: 600,
-  };
 };
 
 export default Page;
