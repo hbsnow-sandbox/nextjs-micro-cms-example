@@ -57,10 +57,13 @@ export const getStaticProps: GetStaticProps = async ({ params }) => {
     },
   });
 
+  if (!blogList) {
+    return { notFound: true };
+  }
+
   return {
     props: { blogList },
     revalidate: 600,
-    notFound: true,
   };
 };
 

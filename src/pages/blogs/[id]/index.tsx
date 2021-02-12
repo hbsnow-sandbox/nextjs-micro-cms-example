@@ -11,7 +11,6 @@ import { toStringId } from "../../../utils/toStringId";
 type Props = {
   blog: Blog;
   draftKey?: string;
-  date: string;
 };
 
 const Page: NextPage<Props> = (props) => {
@@ -93,10 +92,13 @@ export const getStaticProps: GetStaticProps = async ({
     },
   });
 
+  if (!blog) {
+    return { notFound: true };
+  }
+
   return {
     props: { blog, ...draftKey },
     revalidate: 60,
-    notFound: true,
   };
 };
 
