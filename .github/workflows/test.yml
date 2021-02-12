@@ -5,7 +5,6 @@ on:
     types: [opened, synchronize, reopened]
     branches:
       - master
-      - chore/renovate
 
 jobs:
   lint:
