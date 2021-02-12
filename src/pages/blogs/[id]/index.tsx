@@ -63,13 +63,9 @@ const Page: NextPage<Props> = (props) => {
 };
 
 export const getStaticPaths: GetStaticPaths = async () => {
-  const blogList = await client.v1.blogs.$get({
-    query: { fields: "id", limit: 3 },
-  });
-
   return {
     fallback: true,
-    paths: blogList.contents.map((blog) => `/blogs/${blog.id}/`),
+    paths: ["/blogs/test-ssg/"],
   };
 };
 
