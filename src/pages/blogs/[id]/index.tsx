@@ -11,7 +11,6 @@ import { toStringId } from "../../../utils/toStringId";
 type Props = {
   blog: Blog;
   draftKey?: string;
-  date: string;
 };
 
 const Page: NextPage<Props> = (props) => {
@@ -24,7 +23,6 @@ const Page: NextPage<Props> = (props) => {
 
   return (
     <>
-      <p>このページは{props.date}に生成されました</p>
       {draftKey && (
         <div>
           現在プレビューモードで閲覧中です。
@@ -91,7 +89,7 @@ export const getStaticProps: GetStaticProps = async ({
       },
     });
     return {
-      props: { blog, ...draftKey, date: new Date().toString() },
+      props: { blog, ...draftKey },
       revalidate: 60,
     };
   } catch (e) {
