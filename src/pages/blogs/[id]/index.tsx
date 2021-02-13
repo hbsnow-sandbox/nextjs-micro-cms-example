@@ -66,7 +66,7 @@ const Page: NextPage<Props> = (props) => {
 export const getStaticPaths: GetStaticPaths = async () => {
   return {
     fallback: "blocking",
-    paths: ["/blogs/test-ssg/"],
+    paths: ["/blogs/test-ssg"],
   };
 };
 
