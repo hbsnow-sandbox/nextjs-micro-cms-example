@@ -1,5 +1,4 @@
-import aspida from "@aspida/node-fetch";
-import fetch from "node-fetch";
+import aspida from "@aspida/fetch";
 
 import api from "../api/$api";
 

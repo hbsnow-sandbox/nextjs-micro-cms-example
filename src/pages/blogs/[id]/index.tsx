@@ -1,6 +1,11 @@
 import React from "react";
 
-import { NextPage, GetStaticProps, GetStaticPaths } from "next";
+import {
+  NextPage,
+  GetStaticPaths,
+  InferGetStaticPropsType,
+  GetStaticProps,
+} from "next";
 import { useRouter } from "next/dist/client/router";
 import Link from "next/link";
 
@@ -8,12 +13,13 @@ import { Blog } from "../../../types/blog";
 import { client } from "../../../utils/api";
 import { toStringId } from "../../../utils/toStringId";
 
-type Props = {
+type StaticProps = {
   blog: Blog;
   draftKey?: string;
 };
+type PageProps = InferGetStaticPropsType<typeof getStaticProps>;
 
-const Page: NextPage<Props> = (props) => {
+const Page: NextPage<PageProps> = (props) => {
   const { blog, draftKey } = props;
   const router = useRouter();
 
@@ -64,14 +70,13 @@ const Page: NextPage<Props> = (props) => {
 export const getStaticPaths: GetStaticPaths = async () => {
   return {
     fallback: "blocking",
-    paths: ["/blogs/test-ssg"],
+    paths: [],
   };
 };
 
-export const getStaticProps: GetStaticProps = async ({
-  params,
-  previewData,
-}) => {
+export const getStaticProps: GetStaticProps<StaticProps> = async (context) => {
+  const { params, previewData } = context;
+
   if (!params?.id) {
     throw new Error("Error: ID not found");
   }

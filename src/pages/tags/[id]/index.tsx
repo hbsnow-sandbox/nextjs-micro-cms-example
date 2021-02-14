@@ -1,6 +1,11 @@
 import React from "react";
 
-import { GetStaticPaths, GetStaticProps, NextPage } from "next";
+import {
+  GetStaticPaths,
+  GetStaticProps,
+  InferGetStaticPropsType,
+  NextPage,
+} from "next";
 import { useRouter } from "next/dist/client/router";
 import Link from "next/link";
 
@@ -9,9 +14,10 @@ import { Blog } from "../../../types/blog";
 import { client } from "../../../utils/api";
 import { toStringId } from "../../../utils/toStringId";
 
-type Props = {
+type StaticProps = {
   blogList: CommonListContents<Blog>;
 };
+type Props = InferGetStaticPropsType<typeof getStaticProps>;
 
 const Page: NextPage<Props> = (props) => {
   const { blogList } = props;
@@ -44,7 +50,9 @@ export const getStaticPaths: GetStaticPaths = async () => {
   };
 };
 
-export const getStaticProps: GetStaticProps = async ({ params }) => {
+export const getStaticProps: GetStaticProps<StaticProps> = async (context) => {
+  const { params } = context;
+
   if (!params?.id) {
     throw new Error("Error: ID not found");
   }
@@ -60,7 +68,7 @@ export const getStaticProps: GetStaticProps = async ({ params }) => {
     });
     return {
       props: { blogList },
-      revalidate: 600,
+      revalidate: 60,
     };
   } catch (e) {
     return { notFound: true };
