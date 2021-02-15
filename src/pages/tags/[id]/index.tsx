@@ -17,9 +17,9 @@ import { toStringId } from "../../../utils/toStringId";
 type StaticProps = {
   blogList: ListContents<Blog>;
 };
-type Props = InferGetStaticPropsType<typeof getStaticProps>;
+type PageProps = InferGetStaticPropsType<typeof getStaticProps>;
 
-const Page: NextPage<Props> = (props) => {
+const Page: NextPage<PageProps> = (props) => {
   const { blogList } = props;
   const router = useRouter();
 

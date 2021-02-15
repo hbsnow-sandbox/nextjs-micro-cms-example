@@ -1,6 +1,6 @@
 import React from "react";
 
-import { GetStaticProps, NextPage } from "next";
+import { GetStaticProps, InferGetStaticPropsType, NextPage } from "next";
 import Link from "next/link";
 
 import { ListContents } from "../types/api";
@@ -8,12 +8,13 @@ import { Blog } from "../types/blog";
 import { SiteData } from "../types/siteData";
 import { client } from "../utils/api";
 
-type Props = {
+type StaticProps = {
   siteData: SiteData;
   blogList: ListContents<Blog>;
 };
+type PageProps = InferGetStaticPropsType<typeof getStaticProps>;
 
-const Page: NextPage<Props> = (props) => {
+const Page: NextPage<PageProps> = (props) => {
   const { siteData, blogList } = props;
 
   return (
@@ -35,7 +36,7 @@ const Page: NextPage<Props> = (props) => {
   );
 };
 
-export const getStaticProps: GetStaticProps = async () => {
+export const getStaticProps: GetStaticProps<StaticProps> = async () => {
   const siteDataPromise = client.v1.sitedata.$get({
     query: { fields: "title" },
   });
