@@ -9,13 +9,13 @@ import {
 import { useRouter } from "next/dist/client/router";
 import Link from "next/link";
 
-import { CommonListContents } from "../../../types/api";
+import { ListContents } from "../../../types/api";
 import { Blog } from "../../../types/blog";
 import { client } from "../../../utils/api";
 import { toStringId } from "../../../utils/toStringId";
 
 type StaticProps = {
-  blogList: CommonListContents<Blog>;
+  blogList: ListContents<Blog>;
 };
 type Props = InferGetStaticPropsType<typeof getStaticProps>;
 

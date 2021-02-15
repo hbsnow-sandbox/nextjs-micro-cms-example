@@ -1,17 +1,17 @@
-export type CommonListContents<T> = {
+export type ListContents<T> = {
   contents: T[];
   totalCount: number;
   offset: number;
   limit: number;
 };
 
-export type CommonContent = {
+export type Content<T> = {
   id: string;
   createdAt: string;
   updatedAt: string;
   publishedAt: string;
   revisedAt: string;
-};
+} & T;
 
 // https://document.microcms.io/content-api/get-list-contents
 export type GetListContentsQuery = {

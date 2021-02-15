@@ -1,5 +1,5 @@
-import { CommonContent } from "./api";
+import { Content } from "./api";
 
-export type SiteData = CommonContent & {
+export type SiteData = Content<{
   title?: string;
-};
+}>;

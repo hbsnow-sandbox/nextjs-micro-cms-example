@@ -3,14 +3,14 @@ import React from "react";
 import { GetStaticProps, NextPage } from "next";
 import Link from "next/link";
 
-import { CommonListContents } from "../types/api";
+import { ListContents } from "../types/api";
 import { Blog } from "../types/blog";
 import { SiteData } from "../types/siteData";
 import { client } from "../utils/api";
 
 type Props = {
   siteData: SiteData;
-  blogList: CommonListContents<Blog>;
+  blogList: ListContents<Blog>;
 };
 
 const Page: NextPage<Props> = (props) => {

@@ -1,8 +1,8 @@
-import { CommonContent } from "./api";
+import { Content } from "./api";
 import { Tag } from "./tag";
 
-export type Blog = CommonContent & {
+export type Blog = Content<{
   title?: string;
   body?: string;
   tags?: Tag[];
-};
+}>;
