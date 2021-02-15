@@ -1,11 +1,11 @@
-export type ListContents<T> = {
+export type ListContentsResponse<T> = {
   contents: T[];
   totalCount: number;
   offset: number;
   limit: number;
 };
 
-export type Content<T> = {
+export type ContentResponse<T> = {
   id: string;
   createdAt: string;
   updatedAt: string;

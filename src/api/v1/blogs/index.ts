@@ -1,9 +1,9 @@
-import { ListContents, GetListContentsQuery } from "../../../types/api";
-import { Blog } from "../../../types/blog";
+import { GetListContentsQuery } from "../../../types/api";
+import { BlogListResponse } from "../../../types/blog";
 
 export type Methods = {
   get: {
     query?: GetListContentsQuery;
-    resBody: ListContents<Blog>;
+    resBody: BlogListResponse;
   };
 };

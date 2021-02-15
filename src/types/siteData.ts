@@ -1,5 +1,5 @@
-import { Content } from "./api";
+import { ContentResponse } from "./api";
 
-export type SiteData = Content<{
+export type SiteDataResponse = ContentResponse<{
   title?: string;
 }>;

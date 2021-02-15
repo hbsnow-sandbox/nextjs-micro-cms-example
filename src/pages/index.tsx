@@ -3,14 +3,13 @@ import React from "react";
 import { GetStaticProps, InferGetStaticPropsType, NextPage } from "next";
 import Link from "next/link";
 
-import { ListContents } from "../types/api";
-import { Blog } from "../types/blog";
-import { SiteData } from "../types/siteData";
+import { BlogListResponse } from "../types/blog";
+import { SiteDataResponse } from "../types/siteData";
 import { client } from "../utils/api";
 
 type StaticProps = {
-  siteData: SiteData;
-  blogList: ListContents<Blog>;
+  siteData: SiteDataResponse;
+  blogList: BlogListResponse;
 };
 type PageProps = InferGetStaticPropsType<typeof getStaticProps>;
 

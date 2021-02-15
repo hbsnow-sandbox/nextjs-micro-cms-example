@@ -1,8 +1,10 @@
-import { Content } from "./api";
-import { Tag } from "./tag";
+import { ContentResponse, ListContentsResponse } from "./api";
+import { TagResponse } from "./tag";
 
-export type Blog = Content<{
+export type BlogListResponse = ListContentsResponse<BlogResponse>;
+
+export type BlogResponse = ContentResponse<{
   title?: string;
   body?: string;
-  tags?: Tag[];
+  tags?: TagResponse[];
 }>;

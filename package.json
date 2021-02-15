@@ -7,7 +7,7 @@
     "build": "next build",
     "start": "next start",
     "lint": "eslint 'src/**/*.{ts,tsx}' && prettier --check '**/*.{js,ts,tsx,json}'",
-    "lintfix": "eslint --fix 'src/**/*.{ts,tsx}' && prettier --write --ignore-path .gitignore '**/*.{js,ts,tsx,json,md}'",
+    "lintfix": "eslint --fix 'src/**/*.{ts,tsx}' && prettier --write '**/*.{js,ts,tsx,json}'",
     "typecheck": "tsc --pretty --noEmit",
     "test": "jest --watch",
     "test:ci": "jest --ci",
